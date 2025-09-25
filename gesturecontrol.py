@@ -54,15 +54,17 @@ while True:
         vol=np.interp(length,[50,300],[minvol,maxvol])
         volbar=np.interp(length,[50,300],[400,150])
         volper=np.interp(length,[50,300],[0,100])
-        volume.SetMasterVolumeLevel(vol,None)
+        if len(lmlist)!=0 and length2<30:
+             volume.SetMasterVolumeLevel(vol,None)
+             cv2.rectangle(img, (50, 150), (85, 400), (0, 255, 0), 3)
+             cv2.rectangle(img, (50, int(volbar)), (85, 400), (0, 255, 0), 3)
+             cv2.rectangle(img, (50, int(volbar)), (85, 400), (0, 255, 0), cv2.FILLED)
+             cv2.putText(img, f"{int(volper)}%", (40, 450), cv2.FONT_HERSHEY_DUPLEX, 2,
+                    (255, 0, 255), 2)
+        
         if length<50:
             cv2.circle(img, (cx, cy), 15, (0, 256,0 ), cv2.FILLED)
-    cv2.rectangle(img,(50,150),(85,400),(0,255,0),3)
-    cv2.rectangle(img, (50, int(volbar)), (85, 400), (0, 255, 0), 3)
-    cv2.rectangle(img, (50, int(volbar)), (85, 400), (0, 255, 0), cv2.FILLED)
-    cv2.putText(img,f"{int(volper)}%",(40,450),cv2.FONT_HERSHEY_DUPLEX,2,
-                (255,0,255),2)
-
+  
     ctime=time.time()
     fps=1/(ctime-ptime)
     ptime=ctime
@@ -77,4 +79,5 @@ print(f"- Muted: {bool(volume.GetMute())}")
 print(f"- Volume level: {volume.GetMasterVolumeLevel()} dB")
 print(f"- Volume range: {volume.GetVolumeRange()[0]} dB - {volume.GetVolumeRange()[1]} dB")
 volume.SetMasterVolumeLevel(-20.0, None)
+
 """
