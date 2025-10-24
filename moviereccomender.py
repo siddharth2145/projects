@@ -36,7 +36,7 @@ def recommend(movie):
         recommended_movie_names.append(movies.iloc[i[0]].title)
     return recommended_movie_names, recommended_movie_posters
 
-# Streamlit app
+
 st.header('🎬 Movie Recommender System')
 
 movies_dict = pickle.load(open('movie_dict.pkl','rb'))
