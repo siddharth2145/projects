@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Plantation Management System</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js" defer></script>
+</head>
+<body>
+
+  <header>
+    <div class="header-content">
+      <h1><i class="ti ti-plant-2"></i> Plantation Management System</h1>
+      <p class="tagline">Sustainable Agriculture · Healthy Soil · Thriving Crops</p>
+    </div>
+  </header>
+
+  <nav aria-label="Main navigation">
+    <div class="nav-container">
+      <button class="nav-btn active" data-page="home"><i class="ti ti-home"></i> Home</button>
+      <button class="nav-btn" data-page="crop"><i class="ti ti-seeding"></i> Crop Planning</button>
+      <button class="nav-btn" data-page="pest"><i class="ti ti-bug"></i> Pest Control</button>
+      <button class="nav-btn" data-page="erosion"><i class="ti ti-mountain"></i> Erosion</button>
+      <button class="nav-btn" data-page="records"><i class="ti ti-clipboard-list"></i> Farm Records</button>
+      <button class="nav-btn" data-page="weather"><i class="ti ti-cloud-rain"></i> Weather</button>
+      <button class="nav-btn" data-page="analytics"><i class="ti ti-chart-bar"></i> Analytics</button>
+      <button class="nav-btn" data-page="irrigation"><i class="ti ti-droplet"></i> Irrigation</button>
+      <button class="nav-btn" data-page="soil"><i class="ti ti-layers-difference"></i> Soil Health</button>
+      <button class="nav-btn" data-page="market"><i class="ti ti-shopping-cart"></i> Market</button>
+      <button class="nav-btn" data-page="activity"><i class="ti ti-activity"></i> Activity Log</button>
+    </div>
+  </nav>
+
+  <main class="container">
+
+    <!-- ═══════════════ HOME ═══════════════ -->
+    <section class="page active" id="home-page" aria-labelledby="home-heading">
+      <div class="hero">
+        <h2 id="home-heading">Welcome to Smart Plantation Management</h2>
+        <p>Optimize your agricultural practices with our comprehensive management system.</p>
+      </div>
+      <div class="stat-row">
+        <div class="stat"><div class="num" id="s-records">0</div><div class="lbl">Farm Records</div></div>
+        <div class="stat"><div class="num">4</div><div class="lbl">Crop Seasons</div></div>
+        <div class="stat"><div class="num">12</div><div class="lbl">Pest Alerts</div></div>
+        <div class="stat"><div class="num">6</div><div class="lbl">Erosion Tactics</div></div>
+      </div>
+      <div class="features-grid">
+        <div class="feature-card" onclick="navigateTo('crop')">
+          <div class="feature-icon" aria-hidden="true"><i class="ti ti-seeding"></i></div>
+          <h3>Crop Planning</h3>
+          <p>Rotation strategies, seasonal calendars, nutrient schedules, and yield tracking.</p>
+        </div>
+        <div class="feature-card" onclick="navigateTo('pest')">
+          <div class="feature-icon" aria-hidden="true"><i class="ti ti-bug"></i></div>
+          <h3>Pest Control</h3>
+          <p>IPM strategies, pest risk matrix, biological controls, and treatment log.</p>
+        </div>
+        <div class="feature-card" onclick="navigateTo('erosion')">
+          <div class="feature-icon" aria-hidden="true"><i class="ti ti-mountain"></i></div>
+          <h3>Erosion Prevention</h3>
+          <p>Soil loss calculator, cover crop planner, and mitigation checklist.</p>
+        </div>
+        <div class="feature-card" onclick="navigateTo('records')">
+          <div class="feature-icon" aria-hidden="true"><i class="ti ti-clipboard-list"></i></div>
+          <h3>Farm Records</h3>
+          <p>Add, edit, filter and export detailed farm activity logs with priority tracking.</p>
+        </div>
+        <div class="feature-card" onclick="navigateTo('weather')">
+          <div class="feature-icon" aria-hidden="true"><i class="ti ti-cloud-rain"></i></div>
+          <h3>Weather Monitoring</h3>
+          <p>7-day forecast, planting windows, and configurable weather alerts.</p>
+        </div>
+        <div class="feature-card" onclick="navigateTo('analytics')">
+          <div class="feature-icon" aria-hidden="true"><i class="ti ti-chart-bar"></i></div>
+          <h3>Analytics Dashboard</h3>
+          <p>Yield trends, cost breakdowns, and season-over-season performance.</p>
+        </div>
+        <div class="feature-card" onclick="navigateTo('irrigation')">
+          <div class="feature-icon" aria-hidden="true"><i class="ti ti-droplet"></i></div>
+          <h3>Irrigation Management</h3>
+          <p>Moisture tracker, water calculator, and irrigation event log.</p>
+        </div>
+        <div class="feature-card" onclick="navigateTo('market')">
+          <div class="feature-icon" aria-hidden="true"><i class="ti ti-shopping-cart"></i></div>
+          <h3>Market Prices</h3>
+          <p>Mandi prices vs MSP, revenue estimator, and price alert system.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════ CROP PLANNING ═══════════════ -->
+    <section class="page" id="crop-page" aria-labelledby="crop-heading">
+      <div class="hero">
+        <h2 id="crop-heading">Crop Planning &amp; Soil Management</h2>
+        <p>Strategic tools for rotation, seasonal scheduling, soil nutrients, and yield tracking.</p>
+      </div>
+
+      <div class="tabs" id="crop-tabs">
+        <button class="tab active" data-tab="rotation">Rotation</button>
+        <button class="tab" data-tab="calendar">Calendar</button>
+        <button class="tab" data-tab="nutrients">Nutrients</button>
+        <button class="tab" data-tab="yield">Yield Tracker</button>
+      </div>
+
+      <!-- Rotation Tab -->
+      <div class="tab-content active" id="tab-rotation">
+        <h3 class="section-title">Crop Rotation Planner</h3>
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="cr-field">Field Name</label>
+            <input type="text" id="cr-field" placeholder="e.g. North Block A">
+          </div>
+          <div class="form-group">
+            <label for="cr-curr">Current Crop</label>
+            <select id="cr-curr">
+              <option>Corn</option><option>Soybeans</option><option>Wheat</option>
+              <option>Cotton</option><option>Sorghum</option><option>Legumes</option><option>Cover Crop</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="cr-season">Season</label>
+            <select id="cr-season">
+              <option>Spring</option><option>Summer</option><option>Fall</option><option>Winter</option>
+            </select>
+          </div>
+        </div>
+        <button class="btn btn-primary" onclick="addRotation()"><i class="ti ti-plus"></i> Add to Rotation</button>
+        <div id="rot-list" style="margin-top:16px"></div>
+        <div class="tip-box"><strong>Tip:</strong> Alternate between legumes (N-fixers) and heavy feeders like corn every 2–3 seasons. Follow deep-rooted with shallow-rooted crops to condition soil at multiple depths.</div>
+      </div>
+
+      <!-- Calendar Tab -->
+      <div class="tab-content" id="tab-calendar">
+        <h3 class="section-title">Seasonal Planting Calendar</h3>
+        <div class="calendar-grid">
+          <div class="season-card"><h5><i class="ti ti-sun-wind"></i> Spring (Mar–May)</h5><p><strong>Plant:</strong> Corn, soybeans, cotton, vegetables</p><p><strong>Tasks:</strong> Soil testing, fertiliser application, seedbed prep</p><span class="badge badge-green">Active Season</span></div>
+          <div class="season-card"><h5><i class="ti ti-sun"></i> Summer (Jun–Aug)</h5><p><strong>Plant:</strong> Late vegetables, cover crops</p><p><strong>Tasks:</strong> Irrigation, weed control, pest monitoring</p></div>
+          <div class="season-card"><h5><i class="ti ti-leaf"></i> Fall (Sep–Nov)</h5><p><strong>Plant:</strong> Winter wheat, rye, legumes</p><p><strong>Tasks:</strong> Harvest, soil amendment, cover crop seeding</p></div>
+          <div class="season-card"><h5><i class="ti ti-snowflake"></i> Winter (Dec–Feb)</h5><p><strong>Plant:</strong> Cold-hardy crops (mild climates)</p><p><strong>Tasks:</strong> Equipment maintenance, planning, soil rest</p></div>
+        </div>
+        <table class="data-table">
+          <thead><tr><th>Crop</th><th>Sow</th><th>Harvest</th><th>Spacing</th><th>Water Needs</th></tr></thead>
+          <tbody>
+            <tr><td>Corn</td><td>Mar–Apr</td><td>Jul–Aug</td><td>30 cm</td><td><span class="badge badge-blue">High</span></td></tr>
+            <tr><td>Soybeans</td><td>Apr–May</td><td>Sep–Oct</td><td>5 cm</td><td><span class="badge badge-green">Medium</span></td></tr>
+            <tr><td>Wheat</td><td>Oct–Nov</td><td>Jun–Jul</td><td>15 cm</td><td><span class="badge badge-green">Medium</span></td></tr>
+            <tr><td>Cotton</td><td>Apr–May</td><td>Sep–Nov</td><td>60 cm</td><td><span class="badge badge-blue">High</span></td></tr>
+            <tr><td>Cover Rye</td><td>Sep–Oct</td><td>Apr (terminate)</td><td>Broadcast</td><td><span class="badge badge-amber">Low</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Nutrients Tab -->
+      <div class="tab-content" id="tab-nutrients">
+        <h3 class="section-title">Soil Nutrient Status</h3>
+        <div class="form-group" style="max-width:220px">
+          <label for="soil-type">Soil Type</label>
+          <select id="soil-type" onchange="updateNutrients()">
+            <option>Sandy Loam</option><option>Clay</option><option>Silt</option><option>Peat</option>
+          </select>
+        </div>
+        <div id="nutrient-bars"></div>
+        <div class="tip-box"><strong>Testing frequency:</strong> Test soil at least once per season. Adjust NPK based on previous crop residue and target yield requirements.</div>
+      </div>
+
+      <!-- Yield Tab -->
+      <div class="tab-content" id="tab-yield">
+        <h3 class="section-title">Yield Tracker</h3>
+        <div class="form-grid">
+          <div class="form-group"><label for="y-crop">Crop</label><input type="text" id="y-crop" placeholder="e.g. Corn"></div>
+          <div class="form-group"><label for="y-area">Field (acres)</label><input type="number" id="y-area" placeholder="5.0" min="0"></div>
+          <div class="form-group"><label for="y-yield">Yield (tons/acre)</label><input type="number" id="y-yield" placeholder="3.5" min="0" step="0.1"></div>
+          <div class="form-group"><label for="y-season">Season</label>
+            <select id="y-season"><option>Spring 2025</option><option>Fall 2025</option><option>Spring 2026</option></select>
+          </div>
+        </div>
+        <button class="btn btn-primary" onclick="addYield()"><i class="ti ti-plus"></i> Log Yield</button>
+        <div id="yield-list" style="margin-top:16px"></div>
+      </div>
+    </section>
+
+    <!-- ═══════════════ PEST CONTROL ═══════════════ -->
+    <section class="page" id="pest-page" aria-labelledby="pest-heading">
+      <div class="hero">
+        <h2 id="pest-heading">Integrated Pest Management</h2>
+        <p>Monitor, prevent, and control pests using biological, cultural, and targeted chemical methods.</p>
+      </div>
+
+      <div class="tabs" id="pest-tabs">
+        <button class="tab active" data-tab="pidentify">Pest Identifier</button>
+        <button class="tab" data-tab="prisk">Risk Matrix</button>
+        <button class="tab" data-tab="plog">Treatment Log</button>
+        <button class="tab" data-tab="pbio">Biological Controls</button>
+      </div>
+
+      <div class="tab-content active" id="tab-pidentify">
+        <h3 class="section-title">Pest Identification Guide</h3>
+        <div class="search-bar">
+          <input type="text" id="pest-search" placeholder="Search pests... (e.g. aphid, cutworm)" oninput="filterPests()">
+        </div>
+        <div id="pest-table"></div>
+      </div>
+
+      <div class="tab-content" id="tab-prisk">
+        <h3 class="section-title">Pest Risk Assessment Matrix</h3>
+        <p class="section-desc">Risk = Likelihood × Impact. Target controls on High/Critical zones first.</p>
+        <div id="risk-matrix"></div>
+        <div class="form-grid" style="margin-top:16px">
+          <div class="form-group"><label for="rm-crop">Crop at Risk</label><input type="text" id="rm-crop" placeholder="e.g. Corn"></div>
+          <div class="form-group"><label for="rm-pest">Pest Name</label><input type="text" id="rm-pest" placeholder="e.g. Fall Armyworm"></div>
+          <div class="form-group"><label for="rm-like">Likelihood (1–5)</label><input type="number" id="rm-like" min="1" max="5" value="3"></div>
+          <div class="form-group"><label for="rm-imp">Impact (1–5)</label><input type="number" id="rm-imp" min="1" max="5" value="3"></div>
+        </div>
+        <button class="btn btn-primary" onclick="addRisk()"><i class="ti ti-plus"></i> Add Risk Entry</button>
+        <div id="risk-list" style="margin-top:14px"></div>
+      </div>
+
+      <div class="tab-content" id="tab-plog">
+        <h3 class="section-title">Treatment Log</h3>
+        <div class="form-grid">
+          <div class="form-group"><label for="tl-date">Date</label><input type="date" id="tl-date"></div>
+          <div class="form-group"><label for="tl-field">Field</label><input type="text" id="tl-field" placeholder="e.g. South Block"></div>
+          <div class="form-group"><label for="tl-pest">Pest Targeted</label><input type="text" id="tl-pest" placeholder="e.g. Aphids"></div>
+          <div class="form-group"><label for="tl-method">Method</label>
+            <select id="tl-method"><option>Biological</option><option>Chemical</option><option>Cultural</option><option>Mechanical</option><option>Organic Spray</option></select>
+          </div>
+          <div class="form-group"><label for="tl-product">Product / Agent</label><input type="text" id="tl-product" placeholder="e.g. Neem oil"></div>
+          <div class="form-group"><label for="tl-outcome">Outcome</label>
+            <select id="tl-outcome"><option>Effective</option><option>Partially Effective</option><option>Ineffective</option><option>Monitoring</option></select>
+          </div>
+        </div>
+        <button class="btn btn-primary" onclick="addTreatment()"><i class="ti ti-plus"></i> Log Treatment</button>
+        <div id="treatment-list" style="margin-top:14px"></div>
+      </div>
+
+      <div class="tab-content" id="tab-pbio">
+        <h3 class="section-title">Biological &amp; Organic Controls</h3>
+        <div class="features-grid">
+          <div class="feature-card"><div class="feature-icon"><i class="ti ti-bug"></i></div><h3>Ladybugs</h3><p>Controls aphids, mites, scale insects. Release 1,500/1,000 sq ft in early morning near affected plants.</p><span class="badge badge-green">Best for: Aphids</span></div>
+          <div class="feature-card"><div class="feature-icon"><i class="ti ti-bug"></i></div><h3>Lacewings</h3><p>Larvae prey on aphids, caterpillars, mealybugs. Plant dill or coriander to attract naturally.</p><span class="badge badge-green">Best for: Soft pests</span></div>
+          <div class="feature-card"><div class="feature-icon"><i class="ti ti-droplet"></i></div><h3>Neem Oil</h3><p>Disrupts pest life cycle. Mix 2 tsp/litre water. Spray every 7–14 days. Avoid direct sunlight.</p><span class="badge badge-amber">Organic spray</span></div>
+          <div class="feature-card"><div class="feature-icon"><i class="ti ti-droplet"></i></div><h3>Diatomaceous Earth</h3><p>Mechanical pest control. Apply dry powder at base of plants and along pest pathways. Reapply after rain.</p><span class="badge badge-amber">Physical barrier</span></div>
+          <div class="feature-card"><div class="feature-icon"><i class="ti ti-fish"></i></div><h3>Parasitic Wasps</h3><p>Targets caterpillars and beetle larvae. Effective against corn borers and tomato hornworms.</p><span class="badge badge-green">Best for: Borers</span></div>
+          <div class="feature-card"><div class="feature-icon"><i class="ti ti-spray"></i></div><h3>Pyrethrin Spray</h3><p>Fast-acting contact insecticide from chrysanthemum flowers. Breaks down quickly in sunlight.</p><span class="badge badge-blue">Rapid knockdown</span></div>
+        </div>
+        <div class="tip-box"><strong>Scouting rule:</strong> Walk fields in a W-pattern, check 5 plants per stop × 5 stops. Record pest counts per 100 plants to calculate infestation threshold.</div>
+      </div>
+    </section>
+
+    <!-- ═══════════════ EROSION ═══════════════ -->
+    <section class="page" id="erosion-page" aria-labelledby="erosion-heading">
+      <div class="hero">
+        <h2 id="erosion-heading">Erosion Prevention &amp; Soil Conservation</h2>
+        <p>Protect topsoil with proven physical, vegetative, and management strategies.</p>
+      </div>
+
+      <div class="tabs" id="erosion-tabs">
+        <button class="tab active" data-tab="emethods">Methods</button>
+        <button class="tab" data-tab="ecalc">Soil Loss Calculator</button>
+        <button class="tab" data-tab="ecover">Cover Crop Planner</button>
+        <button class="tab" data-tab="echecklist">Checklist</button>
+      </div>
+
+      <div class="tab-content active" id="tab-emethods">
+        <h3 class="section-title">Erosion Control Methods</h3>
+        <div id="acc-erosion"></div>
+      </div>
+
+      <div class="tab-content" id="tab-ecalc">
+        <h3 class="section-title">Simplified Soil Loss Estimator (USLE)</h3>
+        <p class="section-desc">Estimates annual soil loss: A = R × K × LS × C × P</p>
+        <div class="form-grid">
+          <div class="form-group"><label for="e-r">Rainfall Erosivity (R)</label><input type="number" id="e-r" value="150" min="0"><small>MJ·mm/(ha·h·yr). Humid tropics: 200–400</small></div>
+          <div class="form-group"><label for="e-k">Soil Erodibility (K)</label><input type="number" id="e-k" value="0.3" min="0" max="1" step="0.01"><small>0.1 (low) to 0.6 (high erodibility)</small></div>
+          <div class="form-group"><label for="e-ls">Slope Length × Steepness (LS)</label><input type="number" id="e-ls" value="1.5" min="0" step="0.1"><small>Flat=0.5, Moderate=1.5, Steep=4+</small></div>
+          <div class="form-group"><label for="e-c">Cover &amp; Management Factor (C)</label><input type="number" id="e-c" value="0.4" min="0" max="1" step="0.01"><small>Bare soil=1.0, Cover crop=0.1, Forest=0.001</small></div>
+          <div class="form-group"><label for="e-p">Support Practice Factor (P)</label><input type="number" id="e-p" value="0.6" min="0" max="1" step="0.01"><small>No practice=1.0, Terracing=0.1–0.5</small></div>
+        </div>
+        <button class="btn btn-primary" onclick="calcErosion()"><i class="ti ti-calculator"></i> Calculate Soil Loss</button>
+        <div id="erosion-result" style="margin-top:16px"></div>
+      </div>
+
+      <div class="tab-content" id="tab-ecover">
+        <h3 class="section-title">Cover Crop Selector</h3>
+        <div class="form-grid">
+          <div class="form-group"><label for="cc-goal">Primary Goal</label>
+            <select id="cc-goal" onchange="filterCoverCrops()">
+              <option value="all">All Goals</option><option value="nitrogen">Nitrogen Fixation</option>
+              <option value="erosion">Erosion Control</option><option value="weed">Weed Suppression</option>
+              <option value="compaction">Compaction Relief</option>
+            </select>
+          </div>
+          <div class="form-group"><label for="cc-season">Planting Season</label>
+            <select id="cc-season" onchange="filterCoverCrops()">
+              <option value="all">All Seasons</option><option value="fall">Fall</option>
+              <option value="spring">Spring</option><option value="summer">Summer</option>
+            </select>
+          </div>
+        </div>
+        <div id="cover-crop-cards"></div>
+      </div>
+
+      <div class="tab-content" id="tab-echecklist">
+        <h3 class="section-title">Erosion Prevention Checklist</h3>
+        <div id="erosion-checklist"></div>
+        <div class="progress-row">
+          <span class="progress-label">Completion:</span>
+          <div class="progress-track"><div class="progress-fill" id="check-prog"></div></div>
+          <span id="check-pct" class="progress-pct">0%</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════ FARM RECORDS ═══════════════ -->
+    <section class="page" id="records-page" aria-labelledby="records-heading">
+      <div class="hero">
+        <h2 id="records-heading">Farm Records</h2>
+        <p>Digital activity log — add, edit, filter and track all farm operations.</p>
+      </div>
+      <div class="records-header">
+        <div class="filter-row">
+          <select id="f-type" onchange="renderRecords()"><option value="">All Types</option><option>Planting</option><option>Harvest</option><option>Fertilising</option><option>Pest Control</option><option>Irrigation</option><option>Maintenance</option><option>Other</option></select>
+          <select id="f-status" onchange="renderRecords()"><option value="">All Status</option><option>Planned</option><option>In Progress</option><option>Completed</option><option>Cancelled</option></select>
+          <select id="f-priority" onchange="renderRecords()"><option value="">All Priority</option><option>High</option><option>Medium</option><option>Low</option></select>
+        </div>
+        <button class="btn btn-primary" onclick="toggleRecordForm()"><i class="ti ti-plus"></i> Add Record</button>
+      </div>
+      <div class="record-form" id="rec-form">
+        <div class="form-grid">
+          <div class="form-group full-width"><label for="rf-title">Title *</label><input type="text" id="rf-title" placeholder="Activity name"></div>
+          <div class="form-group"><label for="rf-type">Type</label><select id="rf-type"><option>Planting</option><option>Harvest</option><option>Fertilising</option><option>Pest Control</option><option>Irrigation</option><option>Maintenance</option><option>Other</option></select></div>
+          <div class="form-group"><label for="rf-date">Date</label><input type="date" id="rf-date"></div>
+          <div class="form-group"><label for="rf-status">Status</label><select id="rf-status"><option>Planned</option><option>In Progress</option><option>Completed</option><option>Cancelled</option></select></div>
+          <div class="form-group"><label for="rf-priority">Priority</label><select id="rf-priority"><option>Low</option><option>Medium</option><option>High</option></select></div>
+          <div class="form-group full-width"><label for="rf-desc">Description</label><textarea id="rf-desc" placeholder="Details about this activity..."></textarea></div>
+          <div class="form-group full-width"><label for="rf-notes">Notes</label><textarea id="rf-notes" placeholder="Additional notes..."></textarea></div>
+        </div>
+        <div class="form-actions">
+          <button class="btn btn-secondary" onclick="cancelRecord()">Cancel</button>
+          <button class="btn btn-primary" id="rf-save" onclick="saveRecord()">Save Record</button>
+        </div>
+      </div>
+      <div id="rec-list"></div>
+    </section>
+
+    <!-- ═══════════════ WEATHER ═══════════════ -->
+    <section class="page" id="weather-page" aria-labelledby="weather-heading">
+      <div class="hero">
+        <h2 id="weather-heading">Weather Monitoring &amp; Alerts</h2>
+        <p>Track conditions, view 7-day forecasts, and receive planting advisory alerts.</p>
+      </div>
+      <h3 class="section-title">Active Alerts</h3>
+      <div id="weather-alerts"></div>
+      <h3 class="section-title">7-Day Forecast</h3>
+      <div class="weather-grid" id="forecast-grid"></div>
+      <h3 class="section-title">Planting Windows — Next 7 Days</h3>
+      <table class="data-table"><thead><tr><th>Day</th><th>Condition</th><th>Temp</th><th>Advisory</th><th>Suitable?</th></tr></thead><tbody id="pw-tbody"></tbody></table>
+      <h3 class="section-title">Custom Alert Thresholds</h3>
+      <div class="form-grid">
+        <div class="form-group"><label for="rain-thresh">Rain alert threshold (mm)</label><input type="number" id="rain-thresh" value="25" min="0"></div>
+        <div class="form-group"><label for="temp-thresh">Temperature alert (°C)</label><input type="number" id="temp-thresh" value="38" min="0"></div>
+        <div class="form-group"><label for="wind-thresh">Wind alert (km/h)</label><input type="number" id="wind-thresh" value="50" min="0"></div>
+      </div>
+      <button class="btn btn-primary" onclick="saveThresholds()"><i class="ti ti-check"></i> Save Thresholds</button>
+      <div id="thresh-msg" class="success-msg" style="display:none">Thresholds saved successfully.</div>
+    </section>
+
+    <!-- ═══════════════ ANALYTICS ═══════════════ -->
+    <section class="page" id="analytics-page" aria-labelledby="analytics-heading">
+      <div class="hero">
+        <h2 id="analytics-heading">Farm Analytics Dashboard</h2>
+        <p>Visual summaries of yield trends, input costs, and crop performance across seasons.</p>
+      </div>
+      <div class="kpi-row" id="kpi-row"></div>
+      <h3 class="section-title">Yield Trend (tons/acre)</h3>
+      <div class="chart-box"><canvas id="yield-chart"></canvas></div>
+      <h3 class="section-title">Input Cost Breakdown</h3>
+      <div class="chart-split">
+        <div class="chart-box"><canvas id="cost-chart"></canvas></div>
+        <div class="chart-box" id="cost-legend"></div>
+      </div>
+      <h3 class="section-title">Season Summary</h3>
+      <table class="data-table"><thead><tr><th>Season</th><th>Main Crop</th><th>Yield (t/ac)</th><th>Revenue (₹/ac)</th><th>Cost (₹/ac)</th><th>Profit (₹/ac)</th><th>Trend</th></tr></thead><tbody id="season-table"></tbody></table>
+    </section>
+
+    <!-- ═══════════════ IRRIGATION ═══════════════ -->
+    <section class="page" id="irrigation-page" aria-labelledby="irrigation-heading">
+      <div class="hero">
+        <h2 id="irrigation-heading">Irrigation Management</h2>
+        <p>Schedule watering, track field moisture, log irrigation events, and calculate water needs by crop.</p>
+      </div>
+      <div class="tabs" id="irrigation-tabs">
+        <button class="tab active" data-tab="ischedule">Schedule</button>
+        <button class="tab" data-tab="iwater">Water Calculator</button>
+        <button class="tab" data-tab="ilog">Irrigation Log</button>
+      </div>
+      <div class="tab-content active" id="tab-ischedule">
+        <h3 class="section-title">Field Moisture Status</h3>
+        <div id="moisture-bars"></div>
+        <div class="tip-box">Irrigate when soil moisture drops below 50% field capacity. Sandy soils need more frequent, lighter irrigation than clay soils.</div>
+        <h3 class="section-title">Upcoming Irrigation Schedule</h3>
+        <table class="data-table"><thead><tr><th>Field</th><th>Crop</th><th>Next Irrigation</th><th>Method</th><th>Duration</th><th>Status</th></tr></thead><tbody id="irr-schedule-tbody"></tbody></table>
+      </div>
+      <div class="tab-content" id="tab-iwater">
+        <h3 class="section-title">Crop Water Requirement Calculator</h3>
+        <div class="form-grid">
+          <div class="form-group"><label for="wc-crop">Crop type</label>
+            <select id="wc-crop" onchange="calcWater()"><option value="corn">Corn</option><option value="soybean">Soybean</option><option value="wheat">Wheat</option><option value="cotton">Cotton</option><option value="rice">Rice</option><option value="sorghum">Sorghum</option></select>
+          </div>
+          <div class="form-group"><label for="wc-stage">Growth stage</label>
+            <select id="wc-stage" onchange="calcWater()"><option value="0.5">Germination (Kc 0.5)</option><option value="1.0">Vegetative (Kc 1.0)</option><option value="1.2" selected>Flowering (Kc 1.2)</option><option value="0.9">Grain fill (Kc 0.9)</option><option value="0.6">Maturity (Kc 0.6)</option></select>
+          </div>
+          <div class="form-group"><label for="wc-et">Reference ET₀ (mm/day)</label><input type="number" id="wc-et" value="5" min="1" max="15" step="0.5" oninput="calcWater()"></div>
+          <div class="form-group"><label for="wc-area">Field area (hectares)</label><input type="number" id="wc-area" value="2" min="0.1" step="0.5" oninput="calcWater()"></div>
+        </div>
+        <div id="water-result"></div>
+      </div>
+      <div class="tab-content" id="tab-ilog">
+        <h3 class="section-title">Irrigation Event Log</h3>
+        <div class="form-grid">
+          <div class="form-group"><label for="il-date">Date</label><input type="date" id="il-date"></div>
+          <div class="form-group"><label for="il-field">Field</label><input type="text" id="il-field" placeholder="e.g. North Block"></div>
+          <div class="form-group"><label for="il-method">Method</label><select id="il-method"><option>Drip</option><option>Sprinkler</option><option>Flood</option><option>Furrow</option><option>Centre Pivot</option></select></div>
+          <div class="form-group"><label for="il-dur">Duration (hrs)</label><input type="number" id="il-dur" min="0" step="0.5" placeholder="2.5"></div>
+          <div class="form-group"><label for="il-mm">Water applied (mm)</label><input type="number" id="il-mm" min="0" placeholder="25"></div>
+        </div>
+        <button class="btn btn-primary" onclick="addIrrLog()"><i class="ti ti-plus"></i> Log Event</button>
+        <div id="irr-log-list" style="margin-top:14px"></div>
+      </div>
+    </section>
+
+    <!-- ═══════════════ SOIL HEALTH ═══════════════ -->
+    <section class="page" id="soil-page" aria-labelledby="soil-heading">
+      <div class="hero">
+        <h2 id="soil-heading">Soil Health Monitoring</h2>
+        <p>Track pH, organic matter, compaction, and biological indicators for long-term soil productivity.</p>
+      </div>
+      <div class="tabs" id="soil-tabs">
+        <button class="tab active" data-tab="sph">pH &amp; OM</button>
+        <button class="tab" data-tab="sbio">Biology</button>
+        <button class="tab" data-tab="stest">Soil Test Log</button>
+      </div>
+      <div class="tab-content active" id="tab-sph">
+        <h3 class="section-title">pH &amp; Organic Matter by Field</h3>
+        <table class="data-table"><thead><tr><th>Field</th><th>pH</th><th>pH Status</th><th>Organic Matter %</th><th>OM Status</th><th>Last Tested</th></tr></thead><tbody id="ph-table-body"></tbody></table>
+        <h3 class="section-title">pH Correction Guide</h3>
+        <div class="features-grid">
+          <div class="feature-card"><div class="feature-icon"><i class="ti ti-arrow-up"></i></div><h3>Raise pH (acidic soil)</h3><p>Apply agricultural lime at 1–4 tonnes/ha. Dolomite lime also adds Mg. Retest after 6 months.</p><span class="badge badge-blue">Target: 6.0–7.0</span></div>
+          <div class="feature-card"><div class="feature-icon"><i class="ti ti-arrow-down"></i></div><h3>Lower pH (alkaline soil)</h3><p>Apply elemental sulphur at 100–500 kg/ha. Acidifying fertilisers help long-term.</p><span class="badge badge-amber">Target: below 7.5</span></div>
+          <div class="feature-card"><div class="feature-icon"><i class="ti ti-plant-2"></i></div><h3>Boost Organic Matter</h3><p>Add compost (5–10 t/ha), manure, or green manure crops. Reduce tillage to preserve OM.</p><span class="badge badge-green">Target: above 3%</span></div>
+        </div>
+      </div>
+      <div class="tab-content" id="tab-sbio">
+        <h3 class="section-title">Soil Biological Health Indicators</h3>
+        <div id="bio-indicators"></div>
+        <div class="tip-box">Earthworm count is the best field indicator of soil health — aim for 10+ per 30×30×30 cm sample.</div>
+      </div>
+      <div class="tab-content" id="tab-stest">
+        <h3 class="section-title">Soil Test Records</h3>
+        <div class="form-grid">
+          <div class="form-group"><label for="st-field">Field name</label><input type="text" id="st-field" placeholder="e.g. Block A"></div>
+          <div class="form-group"><label for="st-date">Test date</label><input type="date" id="st-date"></div>
+          <div class="form-group"><label for="st-ph">pH value</label><input type="number" id="st-ph" step="0.1" min="3" max="10" placeholder="6.5"></div>
+          <div class="form-group"><label for="st-om">Organic matter (%)</label><input type="number" id="st-om" step="0.1" min="0" placeholder="2.8"></div>
+          <div class="form-group"><label for="st-n">N (kg/ha)</label><input type="number" id="st-n" min="0" placeholder="45"></div>
+          <div class="form-group"><label for="st-p">P (kg/ha)</label><input type="number" id="st-p" min="0" placeholder="22"></div>
+          <div class="form-group"><label for="st-k">K (kg/ha)</label><input type="number" id="st-k" min="0" placeholder="180"></div>
+          <div class="form-group"><label for="st-lab">Lab / source</label><input type="text" id="st-lab" placeholder="e.g. State Agri Lab"></div>
+        </div>
+        <button class="btn btn-primary" onclick="addSoilTest()"><i class="ti ti-plus"></i> Add Test Result</button>
+        <div id="soil-test-list" style="margin-top:14px"></div>
+      </div>
+    </section>
+
+    <!-- ═══════════════ MARKET PRICES ═══════════════ -->
+    <section class="page" id="market-page" aria-labelledby="market-heading">
+      <div class="hero">
+        <h2 id="market-heading">Crop Market Prices</h2>
+        <p>Track indicative market prices, set price alerts, and calculate expected revenue for your harvest.</p>
+      </div>
+      <h3 class="section-title">Indicative Mandi Prices (₹/quintal)</h3>
+      <div class="search-bar"><input type="text" id="mkt-search" placeholder="Search crop..." oninput="filterMarket()"></div>
+      <table class="data-table"><thead><tr><th>Crop</th><th>MSP (₹/qtl)</th><th>Market Price</th><th>vs MSP</th><th>Trend</th><th>Best Season to Sell</th></tr></thead><tbody id="mkt-tbody"></tbody></table>
+      <h3 class="section-title">Revenue Estimator</h3>
+      <div class="form-grid">
+        <div class="form-group"><label for="rev-crop">Crop</label><input type="text" id="rev-crop" placeholder="e.g. Wheat"></div>
+        <div class="form-group"><label for="rev-qty">Yield (quintals)</label><input type="number" id="rev-qty" min="0" placeholder="120"></div>
+        <div class="form-group"><label for="rev-price">Expected price (₹/qtl)</label><input type="number" id="rev-price" min="0" placeholder="2200"></div>
+        <div class="form-group"><label for="rev-cost">Input cost (₹)</label><input type="number" id="rev-cost" min="0" placeholder="15000"></div>
+      </div>
+      <button class="btn btn-primary" onclick="calcRevenue()"><i class="ti ti-calculator"></i> Estimate Revenue</button>
+      <div id="rev-result" style="margin-top:14px"></div>
+      <h3 class="section-title">Price Alerts</h3>
+      <div class="form-grid">
+        <div class="form-group"><label for="pa-crop">Crop</label><input type="text" id="pa-crop" placeholder="e.g. Soybean"></div>
+        <div class="form-group"><label for="pa-high">Alert when price above (₹/qtl)</label><input type="number" id="pa-high" min="0"></div>
+        <div class="form-group"><label for="pa-low">Alert when price below (₹/qtl)</label><input type="number" id="pa-low" min="0"></div>
+      </div>
+      <button class="btn btn-primary" onclick="addPriceAlert()"><i class="ti ti-bell"></i> Set Alert</button>
+      <div id="price-alerts-list" style="margin-top:12px"></div>
+    </section>
+
+    <!-- ═══════════════ ACTIVITY LOG ═══════════════ -->
+    <section class="page" id="activity-page" aria-labelledby="activity-heading">
+      <div class="hero">
+        <h2 id="activity-heading">Farm Activity Log</h2>
+        <p>Chronological log of all farm operations with timeline view, search, and CSV export.</p>
+      </div>
+      <div class="stat-row" id="act-stats"></div>
+      <div class="records-header">
+        <div class="filter-row">
+          <input type="text" id="act-search" placeholder="Search activities..." oninput="renderActivity()" style="width:180px">
+          <select id="act-filter-cat" onchange="renderActivity()"><option value="">All categories</option><option>Planting</option><option>Harvest</option><option>Fertilising</option><option>Pest Control</option><option>Irrigation</option><option>Maintenance</option><option>Soil Work</option><option>Other</option></select>
+          <select id="act-filter-month" onchange="renderActivity()"><option value="">All months</option><option>Jan</option><option>Feb</option><option>Mar</option><option>Apr</option><option>May</option><option>Jun</option><option>Jul</option><option>Aug</option><option>Sep</option><option>Oct</option><option>Nov</option><option>Dec</option></select>
+        </div>
+        <div style="display:flex;gap:8px">
+          <button class="btn btn-secondary" onclick="exportCSV()"><i class="ti ti-download"></i> Export CSV</button>
+          <button class="btn btn-primary" onclick="toggleActForm()"><i class="ti ti-plus"></i> Add Activity</button>
+        </div>
+      </div>
+      <div class="record-form" id="act-form">
+        <div class="form-grid">
+          <div class="form-group full-width"><label for="af-title">Activity title *</label><input type="text" id="af-title" placeholder="e.g. Applied urea to North Block"></div>
+          <div class="form-group"><label for="af-cat">Category</label><select id="af-cat"><option>Planting</option><option>Harvest</option><option>Fertilising</option><option>Pest Control</option><option>Irrigation</option><option>Maintenance</option><option>Soil Work</option><option>Other</option></select></div>
+          <div class="form-group"><label for="af-date">Date</label><input type="date" id="af-date"></div>
+          <div class="form-group"><label for="af-field">Field / location</label><input type="text" id="af-field" placeholder="e.g. Block C"></div>
+          <div class="form-group"><label for="af-by">Performed by</label><input type="text" id="af-by" placeholder="e.g. Ramesh / Team A"></div>
+          <div class="form-group full-width"><label for="af-notes">Notes</label><textarea id="af-notes" placeholder="Details, observations, quantities used..."></textarea></div>
+        </div>
+        <div class="form-actions">
+          <button class="btn btn-secondary" onclick="cancelAct()">Cancel</button>
+          <button class="btn btn-primary" id="af-save" onclick="saveActivity()">Add Activity</button>
+        </div>
+      </div>
+      <div id="act-timeline"></div>
+    </section>
+
+  </main>
+
+  <script src="nav.js"></script>
+  <script src="crop.js"></script>
+  <script src="pest.js"></script>
+  <script src="erosion.js"></script>
+  <script src="records.js"></script>
+  <script src="weather.js"></script>
+  <script src="analytics.js"></script>
+  <script src="irrigation.js"></script>
+  <script src="soil.js"></script>
+  <script src="market.js"></script>
+  <script src="activity.js"></script>
+</body>
+</html>
